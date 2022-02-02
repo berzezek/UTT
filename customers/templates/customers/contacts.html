@@ -1,0 +1,59 @@
+{% extends 'customers/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+<h4 class="text-center">Contacts</h4>
+{% for contact in contacts %}
+<div class="row">
+    <div class="col s12 m6">
+      <div class="card brown darken-1">
+        <div class="card-content white-text">
+          <span class="card-title">{{ contact.phone }}</span>
+          
+          <p>
+            <label>
+              {% if contact.is_telegram %}
+              <input type="checkbox" checked="checked" disabled="disabled" />
+              {% else %}
+              <input type="checkbox" disabled="disabled" />
+              {% endif %}
+              <span>Telegram</span>
+            </label>
+          </p>
+          
+          <p>
+            <label>
+              {% if contact.is_whatsup %}
+              <input type="checkbox" checked="checked" disabled="disabled" />
+              {% else %}
+              <input type="checkbox" disabled="disabled" />
+              {% endif %}
+              <span>Whatsup</span>
+            </label>
+          </p>
+          
+          <p>
+            <label>
+              {% if contact.is_other %}
+              <input type="checkbox" checked="checked" disabled="disabled" />
+              {% else %}
+              <input type="checkbox" disabled="disabled" />
+              {% endif %}
+              <span>Other</span>
+            </label>
+          </p>
+          <p>{{ contact.address }}</p>
+          <p>{{ contact.contact_description }}</p>
+          
+        </div>
+        <div class="card-action">
+          <a href="{% url 'customer_detail' contact.customer.pk %}">Back</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endfor %}
+</div>
+{% endblock %}

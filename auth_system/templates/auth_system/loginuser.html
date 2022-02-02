@@ -1,0 +1,14 @@
+{% extends 'customers/base.html' %}
+{% load materializecss %}
+
+{% block content %}
+<div class="container">
+<h2 class="text-center">LOGIN</h2>
+<h4>{{ error }}</h4>
+<form method="POST" class="form-control p-5">
+    {% csrf_token %} 
+    {{ form|materializecss }}
+    <input type="submit" value="Log in" class="btn"/>
+</form>
+</div>
+{% endblock %}
