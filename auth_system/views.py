@@ -3,7 +3,6 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, logout, authenticate
 
 
-
 def logoutuser(request):
     if request.method == 'POST':
         logout(request)

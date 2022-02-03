@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-3pk$6bw7kvwwb=a&o3@3^bhct-)iijpr=v9#i%9j*by8u91+@g
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -121,7 +121,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = 'static/'
-# STATIC_ROOT = BASE_DIR / 'static'
+STATIC_ROOT = BASE_DIR / 'UTT/static'
 
 STATICFILES_DIRS = [
     BASE_DIR / "static",
@@ -132,3 +132,8 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_URL = 'loginuser'
+
+try:
+    from .local_settings import *
+except ImportError:
+    print('You are in production')

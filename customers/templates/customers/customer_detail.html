@@ -8,21 +8,21 @@
     <div class="row">
         <div class="col s12 m12">
           {% if need_to_pay %}
-          <div class="card purple darken-1">
+          <div class="card red darken-2">
             {% else %}
           <div class="card grey darken-1">
             {% endif %}
             <div class="card-content black-text">
               <span class="card-title">{{ customer.name }}</span>
               <h6>{{ customer.descrih6tion }}</h6>
-              <h6>Age: {{ customer.age }}</h6>
+              <h6>Age: {{ age }}</h6>
               <h6>Tariff: {{ customer.tariff }}</h6>
-              <a href="tel:{{ customer.phone }}"><h6>Phone: {{ customer.phone }}</h6></a>
+              <a href="tel:{{ customer.phone }}" class="black-text"><h6>Phone: {{ customer.phone }}</h6></a>
               <h6>Couch: {{ customer.couch }}</h6>
-              <h6>Created: {{ customer.created_by }}</h6>
+              <h6>Created: {{ customer.created_by|date:'Y M d' }}</h6>
             </div>
             <div class="card-action">
-              <a href="{% url 'customers' %}">Back</a>
+              <a href="{% url 'customers' %}">To Customers</a>
               <a href="{% url 'customer_update' customer.pk %}">Update</a>
               <a href="{% url 'payments' customer.pk %}">Payment</a>
             </div>

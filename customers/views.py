@@ -30,13 +30,15 @@ def customer_detail(request, c_pk):
     customer = get_object_or_404(Customer, pk=c_pk)
     payment_required = Customer.objects.filter(pk=c_pk).filter(payment__month_is_paid__lte=datetime.datetime.now().month)
     created_by_month = Customer.objects.get(pk=c_pk).created_by.month
+    customer_age = customer.age + datetime.datetime.now().year - customer.created_by.year
+    print('age', customer_age)
     need_to_pay = False
     if (len(payment_required) + created_by_month if payment_required else 0)  < datetime.datetime.now().month:
         need_to_pay = True
     return render(
         request, 
         'customers/customer_detail.html', 
-            {'customer': customer, 'need_to_pay': need_to_pay})
+            {'customer': customer, 'need_to_pay': need_to_pay, 'age': customer_age})
 
 
 def payments(request, c_pk):
@@ -102,6 +104,7 @@ def couch_detail(request, couch_pk):
     couch = get_object_or_404(Couch, pk=couch_pk)
     customers = Customer.objects.filter(couch=couch)
     customer_count = customers.count()
+
     return render(request, 'customers/couch_detail.html', {'couch': couch, 'customers': (customers if customers else ''), 'customer_count': customer_count})
 
 @login_required
@@ -117,3 +120,8 @@ def couch_add(request):
             return render(request, 'customers/couch_add.html', {'form': form})
         return redirect('couchs')
 
+
+def delayed_payment(request):
+    qurent_date = datetime.datetime.now()
+    delayed_payment = Customer.objects.filter(created_by__year__gte=qurent_date.year).exclude(payment__month_is_paid__lte=qurent_date.month)
+    return render(request, 'customers/need_to_pay.html', {'delayed_payment': delayed_payment})

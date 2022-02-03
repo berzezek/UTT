@@ -15,15 +15,15 @@
 <body>
   <nav class="white" role="navigation">
     <div class="nav-wrapper container">
-      <a id="logo-container" href="{% url 'home' %}" class="brand-logo">UTT</a>
 
       <ul class="right">
-        <li><a href="{% url 'customers' %}">Cusromers</a></li>
+        <li><a href="{% url 'customers' %}">Customers</a></li>
         <li><a href="{% url 'couchs' %}">Couchs</a></li>
+        <li><a href="{% url 'delayed_payment' %}">Delayed</a></li>
         {% if user.is_authenticated %}
         <form method="POST" action="{% url 'logoutuser' %}" class="right">
           {% csrf_token %}
-        <input type="submit" value="Logout" class="validate">
+        <input type="submit" value="Logout">
         </form>
         {% else %}
         <li><a href="{% url 'loginuser' %}">Login</a></li>
@@ -34,6 +34,7 @@
         <li><a href="{% url 'customers' %}">Cusromers</a></li>
         <li><a href="{% url 'couchs' %}">Couchs</a></li>
         <li><a href="{% url 'old_customers' %}">Old cusromers</a></li>
+        <li><a href="{% url 'delayed_payment' %}">Delayed payment</a></li>
       </ul>
       <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
 
