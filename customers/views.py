@@ -30,15 +30,14 @@ def customer_detail(request, c_pk):
     customer = get_object_or_404(Customer, pk=c_pk)
     payment_required = Customer.objects.filter(pk=c_pk).filter(payment__month_is_paid__lte=datetime.datetime.now().month)
     created_by_month = Customer.objects.get(pk=c_pk).created_by.month
-    customer_age = customer.age + datetime.datetime.now().year - customer.created_by.year
-    print('age', customer_age)
+    customer_age = (customer.age if customer.age else 0) + datetime.datetime.now().year - customer.created_by.year
     need_to_pay = False
     if (len(payment_required) + created_by_month if payment_required else 0)  < datetime.datetime.now().month:
         need_to_pay = True
     return render(
         request, 
         'customers/customer_detail.html', 
-            {'customer': customer, 'need_to_pay': need_to_pay, 'age': (customer_age if customer_age else 0)})
+            {'customer': customer, 'need_to_pay': need_to_pay, 'age': customer_age})
 
 
 def payments(request, c_pk):
