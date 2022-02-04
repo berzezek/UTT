@@ -38,7 +38,7 @@ def customer_detail(request, c_pk):
     return render(
         request, 
         'customers/customer_detail.html', 
-            {'customer': customer, 'need_to_pay': need_to_pay, 'age': customer_age})
+            {'customer': customer, 'need_to_pay': need_to_pay, 'age': (customer_age if customer_age else 0)})
 
 
 def payments(request, c_pk):
