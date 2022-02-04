@@ -24,20 +24,23 @@
       {% if customer_count %}
       <span class="right">Total customer: {{ customer_count }}</span>
       {% endif %}
-      {% for customer in customers %}
-      <div class="row">
-        <div class="col s12 m4">
-          <div class="card blue darken-1">
-            <div class="card-content black-text">
-              <span class="card-title">{{ customer.name}}</span>
-            </div>
-            <div class="card-action">
-              <a href="{% url 'customer_detail' customer.pk %}">To Couchs</a>
-            </div>
-          </div>
-        </div>
-      </div>
-      
-      {% endfor %}
+      <table>
+        <thead>
+          <tr>
+              <th>Name</th>
+              <th>Options</th>
+          </tr>
+        </thead>
+  
+        <tbody>
+          {% for customer in customers %}
+          <tr class="brown-text">
+            <td>{{ customer.name }}</td>
+            <td><a href="{% url 'customer_detail' customer.pk %}">Details</a></td>
+          </tr>
+  
+          {% endfor %}
+        </tbody>
+      </table>
 </div>
 {% endblock %}
