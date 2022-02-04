@@ -12,10 +12,11 @@ def index(request):
 
 def customers(request):
     customers = Customer.objects.filter(is_active=True)
+    count = customers.count()
     return render(
         request, 
         'customers/customers.html', 
-        {'customers': customers})
+        {'customers': customers, 'count': count})
 
 
 def old_customers(request):

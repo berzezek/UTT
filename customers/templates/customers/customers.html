@@ -3,24 +3,30 @@
 
 {% block content %}
 <div class="container">
-  <a href="{% url 'customer_add' %}"><h4 class="center">Customers</h4></a>
-
-{% for customer in customers %}
-<div class="row">
-    <div class="col s12 m6">
-      <div class="card blue-grey darken-1">
-        <div class="card-content white-text">
-          <span class="card-title">{{ customer.name }}</span>
-
-        </div>
-        <div class="card-action">
-          <a href="{% url 'customer_detail' customer.pk %}">Details</a>
-        </div>
-      </div>
-    </div>
+  <div class="right">
+    <a href="{% url 'customer_add' %}"><h5 class="btn">Add a customer</h5></a>
   </div>
 
-{% endfor %}
+  <h5>Customers count: {{ count }}</h5>
+  <table>
+      <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Options</th>
+        </tr>
+      </thead>
 
+      <tbody>
+        {% for customer in customers %}
+        <tr>
+          <td>{{ customer.name }}</td>
+          <td>{{ customer.customer_description|truncatechars:20 }}</td>
+          <td><a href="{% url 'customer_detail' customer.pk %}">Details</a></td>
+        </tr>
+
+        {% endfor %}
+      </tbody>
+    </table>
 </div>
 {% endblock %}

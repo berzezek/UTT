@@ -3,22 +3,27 @@
 
 {% block content %}
 <div class="container">
-  <h4 class="center">Need to pay</h4>
-{% for pay in delayed_payment %}
-<div class="row">
-    <div class="col s12 m6">
-      <div class="card red darken-1">
-        <div class="card-content white-text">
-          <span class="card-title">{{ pay.name }}</span>
-          <p>Tariff: {{ pay.tariff }}</p>
-        </div>
-        <div class="card-action">
-          <a href="{% url 'customer_detail' pay.pk %}">Details</a>
-        </div>
-      </div>
-    </div>
-  </div>
+  <h5 class="center">Need to pay</h5>
 
-{% endfor %}
+  <table>
+      <thead>
+        <tr>
+            <th>Name</th>
+            <th>Tariff</th>
+            <th>Options</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        {% for pay in delayed_payment %}
+        <tr class="red-text">
+          <td>{{ pay.name }}</td>
+          <td>{{ pay.tariff }}</td>
+          <td><a href="{% url 'customer_detail' pay.pk %}">Details</a></td>
+        </tr>
+
+        {% endfor %}
+      </tbody>
+    </table>
 </div>
 {% endblock %}
