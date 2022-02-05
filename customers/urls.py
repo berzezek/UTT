@@ -12,6 +12,7 @@ from .views import (
     couch_add, 
     payment_add,
     delayed_payment,
+    payment_update
     )
 
 urlpatterns = [
@@ -21,6 +22,7 @@ urlpatterns = [
     path('customer_add/', customer_add, name='customer_add'),
     path('customer/<int:c_pk>/', customer_detail, name='customer_detail'),
     path('customer/<int:c_pk>/payments/', payments, name='payments'),
+    path('payment_update/<int:p_pk>/', payment_update, name='payment_update'),
     path('customer/<int:c_pk>/payment_add/', payment_add, name='payment_add'),
     path('customer/<int:c_pk>/customer_update/', customer_update, name='customer_update'),
     path('couchs/', couchs, name='couchs'),

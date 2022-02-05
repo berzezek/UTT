@@ -125,3 +125,17 @@ def delayed_payment(request):
     qurent_date = datetime.datetime.now()
     delayed_payment = Customer.objects.filter(created_by__year__gte=qurent_date.year).exclude(payment__month_is_paid__lte=qurent_date.month)
     return render(request, 'customers/need_to_pay.html', {'delayed_payment': delayed_payment})
+
+@login_required
+def payment_update(request, p_pk):
+    data = get_object_or_404(Payment, pk=p_pk)
+    if request.method == 'GET':
+        form = PaymentForm(instance=data)
+        return render(request, 'customers/payment_update.html', {'form': form})
+    else:
+        form = PaymentForm(request.POST)
+        if form.is_valid():
+            form.save()
+        else:
+            return render(request, 'customers/payment_update.html', {'form': form})
+        return redirect('customers')

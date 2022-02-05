@@ -17,7 +17,7 @@
         <tbody>
             {% for payment in payments %}
           <tr>
-            <td>{{ payment.date_of_payment }}</td>
+            <td><a href="{% url 'payment_update' payment.pk %}">{{ payment.date_of_payment }}</a></td>
             <td>{{ payment.value_of_payment }}</td>
             <td>{{ payment.month_is_paid }}</td>
             <td>{{ payment.payment_description }}</td>
